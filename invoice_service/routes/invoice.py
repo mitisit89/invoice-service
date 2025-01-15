@@ -51,9 +51,14 @@ async def create_application(application: ApplicationCreate, db: AsyncSession = 
 @router.get("/", response_model=list[ApplicationResponse])
 async def list_applications(
     db: AsyncSession = Depends(get_db),
-    user_name: str = Query(str, title="User Name", min_length=1, max_length=100),
+    user_name: str | None = None,
     page: int = Query(1, ge=1),
     size: int = Query(10, ge=1, le=100),
 ):
-    page = await db.execute(select(Application).where(Application.user_name == user_name))
+    if user_name:
+        page = await db.execute(
+            select(Application).where(Application.user_name == user_name).offset((page - 1) * size).limit(size)
+        )
+    else:
+        page = await db.execute(select(Application).offset((page - 1) * size).limit(size))
     return page.scalars().all()
