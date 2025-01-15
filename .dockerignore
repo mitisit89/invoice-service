@@ -84,3 +84,5 @@ venv/
 # VS Code
 .vscode/
 *.md
+tests/
+tests.py
