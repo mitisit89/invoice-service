@@ -1,3 +1,4 @@
+from datetime import datetime
 from pydantic import BaseModel, Field
 
 
@@ -10,7 +11,7 @@ class ApplicationResponse(BaseModel):
     id: int
     user_name: str
     description: str
-    created_at: str
+    created_at: datetime
 
     class Config:
         from_attributes: bool = True
