@@ -10,7 +10,11 @@ anyio==4.8.0
     #   starlette
     #   watchfiles
 async-timeout==5.0.1
-    # via aiokafka
+    # via
+    #   aiokafka
+    #   asyncpg
+asyncpg==0.30.0
+    # via invoce-service (pyproject.toml)
 certifi==2024.12.14
     # via
     #   httpcore
@@ -57,10 +61,6 @@ mdurl==0.1.2
     # via markdown-it-py
 packaging==24.2
     # via aiokafka
-psycopg==3.2.3
-    # via invoce-service (pyproject.toml)
-psycopg-binary==3.2.3
-    # via psycopg
 pydantic==2.10.5
     # via
     #   fastapi
@@ -100,7 +100,6 @@ typing-extensions==4.12.2
     #   aiokafka
     #   anyio
     #   fastapi
-    #   psycopg
     #   pydantic
     #   pydantic-core
     #   rich
