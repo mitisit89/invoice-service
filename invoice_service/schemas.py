@@ -13,4 +13,4 @@ class ApplicationResponse(BaseModel):
     created_at: str
 
     class Config:
-        orm_mode = True
+        orm_mode: bool = True
