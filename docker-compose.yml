@@ -26,12 +26,21 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - "2181:2181"
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=local
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:9092
+    ports:
+      - "8080:8080"
+    depends_on:
+      - kafka
   app:
     build: .
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql+asyncpg://user:password@db:5432/dbname
+      - DATABASE_URL=postgresql+psycopg://user:password@db:5432/dbname
       - KAFKA_SERVER=kafka:9092
       - KAFKA_TOPIC=new_applications
     depends_on:
